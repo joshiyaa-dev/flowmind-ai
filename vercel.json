@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "cd frontend && npm install",
   "builds": [
     {
       "src": "api/index.py",
