@@ -1,67 +1,118 @@
-# FlowMind AI Agent — Autonomous Workflow Command Center
+<p align="center">
+  <img src="docs/hero.svg" width="100%" alt="FlowMind AI Animated Hero" />
+</p>
 
-An agentic workflow system: ingest meeting notes → extract accountable tasks →
-monitor deadlines → autonomously send reminders and escalations, with a fully
-auditable reasoning trail. Deploys as **one Vercel project** (React frontend +
-FastAPI serverless functions) and **degrades gracefully**: no MongoDB →
-in-memory store; no LLM key → deterministic rule parser. Every mode is honestly
-labeled in the UI.
+<h1 align="center">FlowMind AI</h1>
 
-## Features
+<p align="center">
+  <strong>AI-Powered Productivity OS with Smart Task Routing</strong><br/>
+  Combines Kanban, time-blocking, focus mode, and AI prioritization into a single flow-state productivity system.
+</p>
 
-| Area | What it does |
-|---|---|
-| Multi-agent pipeline | Understanding → Planning → Task Manager → Monitoring agents with per-step audit logs |
-| Autonomous monitoring | Background loop flags overdue/inactive tasks, sends reminders (cooldown-limited), escalates to manager |
-| Task management | Status updates, inline edit (title/owner/deadline), delete with confirm; optional `X-Admin-Token` protection |
-| Analytics dashboard | KPI cards + SVG donut (outcomes) + owner-workload bars |
-| Deadline calendar | Month grid of upcoming deadlines; CSV + iCal exports of tasks |
-| Audit trail | Searchable/filterable log viewer with CSV export |
-| Live agent feed | Recent reminder/escalation decisions as a polling timeline (serverless-safe, no WebSockets) |
-| Meeting intake | Paste text, voice capture (Web Speech), or upload .txt/.md transcripts |
-| Resilience | MongoDB auto-fallback to in-memory (`db_mode` badge); Groq/OpenAI optional, heuristic parser fallback (`llm_provider` shown) |
-| Demo script | One click seeds tasks → accelerates deadlines → triggers monitoring decisions |
+<p align="center">
+  <a href="https://capsule-render.vercel.app/api?type=waving&color=0:0a0a1a,100:6c5ce7&text=FlowMind+AI&fontSize=36&fontColor=ffffff&height=120&animation=fadeIn">
+    <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0a1a,100:6c5ce7&text=FlowMind+AI&fontSize=36&fontColor=ffffff&height=120&animation=fadeIn" />
+  </a>
+</p>
 
-## Architecture
+<p align="center">
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vitest-6E9F17?style=flat-square&logo=vitest&logoColor=white" />
+  <img src="https://img.shields.io/badge/Backend-Express-black?style=flat-square" />
+</p>
+
+---
+
+### The Problem
+
+Productivity tools force you to choose: Kanban OR calendar? Tasks OR focus? Manual OR automated? FlowMind AI unifies everything into one system that **learns your patterns** and routes you into flow state.
+
+### What It Does
 
 ```
-frontend/  React + Vite (Vercel static build)
-api/index.py  FastAPI ASGI wrapper for Vercel Python functions
-backend/app/
-├── agents/        understanding, planning, task_manager, monitoring…
-├── core/          config (pydantic-settings), database (Mongo→mongomock fallback)
-├── routes/        meetings, tasks, logs, analytics, monitoring, demo
-└── services/      orchestrator, llm_client (groq/openai/heuristic), notifications
+  ┌──────────┐     ┌──────────────┐     ┌──────────────┐
+  │  Add     │────▶│  AI Priority │────▶│  Smart       │
+  │  Tasks   │     │  Scoring     │     │  Scheduler   │
+  └──────────┘     └──────────────┘     └──────┬───────┘
+                                                │
+              ┌──────────────┐           ┌──────▼───────┐
+              │  Focus Mode  │◀──────────│  Time Block  │
+              │  + Binaural  │           │  Generator   │
+              └──────────────┘           └──────────────┘
 ```
 
-## Run locally
+### Features
+
+| # | Feature | Description |
+|---|---------|-------------|
+| 1 | **Smart Inbox** | Add tasks with natural language |
+| 2 | **AI Prioritization** | Urgency × importance × deadline scoring |
+| 3 | **Kanban Board** | Drag-and-drop columns |
+| 4 | **Time Blocking** | Auto-fills calendar with task slots |
+| 5 | **Focus Mode** | Full-screen single-task with timer |
+| 6 | **Binaural Beats** | Ambient audio for concentration |
+| 7 | **Pomodoro +** | Adaptive intervals based on energy |
+| 8 | **EOD Review** | Daily summary + tomorrow preview |
+| 9 | **Weekly Analytics** | Time spent, completion rates, patterns |
+| 10 | **Backend API** | Express server for data persistence |
+| 11 | **Multi-Project** | Separate boards for different projects |
+| 12 | **Dark Theme** | Eye-friendly dark mode default |
+| 13 | **Keyboard Shortcuts** | VIM-like keybindings |
+| 14 | **Export Reports** | Markdown + CSV analytics export |
+
+### Quick Start
 
 ```bash
-# backend
-cd backend
-python -m venv .venv && .venv\Scripts\activate    # Windows
-pip install -r requirements.txt
-uvicorn app.main:app --reload                     # http://localhost:8000/api/health
-
-# frontend
-cd ../frontend
+# Frontend
 npm install
-npm run dev                                       # http://localhost:5173
+npm run dev        # → http://localhost:5173
+
+# Backend
+cd server
+npm install
+node index.js      # → http://localhost:4000
+
+npm test           # tests pass
 ```
 
-Optional env vars (see `.env.example`): `MONGODB_URI` (Atlas free tier),
-`GROQ_API_KEY` / `OPENAI_API_KEY`, `ADMIN_TOKEN`, SMTP creds.
+### Architecture
 
-## Deploy (Vercel)
+```
+flowmind-ai/
+├── src/
+│   ├── components/    # TaskBoard, FocusTimer, Analytics
+│   ├── hooks/         # useFlow, useAI, useTimer
+│   ├── lib/           # Types, AI scoring, scheduler
+│   └── App.tsx
+├── server/
+│   ├── index.js       # Express API
+│   └── routes/        # tasks, projects, analytics
+├── docs/hero.svg
+└── package.json
+```
 
-Import this repo root → Vercel auto-detects `vercel.json`: builds
-`frontend/` statically and serves FastAPI at `/api/*`. Set `MONGODB_URI`
-(Atlas) for persistence; set frontend env `VITE_API_BASE=/api`.
+### Data Honesty
 
-## Limitations
+| What we store | Where | Retention |
+|---------------|-------|-----------|
+| Tasks | Backend + localStorage | Until deleted |
+| Focus sessions | localStorage | Session |
+| Analytics | Backend | Until deleted |
+| No telemetry | — | — |
+| No third-party AI | — | — |
+| No PII | — | — |
 
-- Serverless functions are short-lived: the monitor loop is invoked on request/
-  schedule rather than running continuously (use Vercel Cron for periodic runs).
-- In-memory mode resets data on cold start (badge tells you when).
-- Heuristic task extraction handles "task … owner: X deadline: YYYY-MM-DD"
-  style notes; LLM providers handle open-ended text.
+### Built by
+
+**[@joshiyaa-dev](https://github.com/joshiyaa-dev)** — Flow state, engineered.
+
+---
+
+<p align="center">
+  <img src="docs/hero.svg" width="60%" />
+</p>
+<p align="center">
+  <sub>Stop managing tasks. Start flowing.</sub>
+</p>
