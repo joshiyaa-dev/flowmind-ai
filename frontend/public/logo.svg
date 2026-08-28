@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff793f"/><stop offset="1" stop-color="#2fc6cc"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="#120b2a"/>
+  <g stroke="url(#g)" stroke-width="2.2" opacity=".55">
+    <line x1="38" y1="44" x2="60" y2="60"/>
+    <line x1="82" y1="44" x2="60" y2="60"/>
+    <line x1="38" y1="44" x2="82" y2="44"/>
+    <line x1="60" y1="60" x2="60" y2="82"/>
+    <line x1="38" y1="44" x2="60" y2="82"/>
+    <line x1="82" y1="44" x2="60" y2="82"/>
+  </g>
+  <circle cx="38" cy="44" r="11" fill="#1a1140" stroke="url(#g)" stroke-width="3"/>
+  <circle cx="82" cy="44" r="11" fill="#1a1140" stroke="url(#g)" stroke-width="3"/>
+  <circle cx="60" cy="60" r="12" fill="#ff793f" opacity=".9">
+    <animate attributeName="r" values="12;14;12" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="60" cy="82" r="10" fill="#1a1140" stroke="#2fc6cc" stroke-width="3"/>
+  <circle cx="38" cy="44" r="3.5" fill="#ff793f"/>
+  <circle cx="82" cy="44" r="3.5" fill="#2fc6cc"/>
+  <circle cx="60" cy="82" r="3" fill="#2fc6cc"/>
+</svg>
