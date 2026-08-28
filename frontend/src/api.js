@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
+const API_BASE = import.meta.env.VITE_API_BASE || '/api';
 const API_ROOT = API_BASE.replace(/\/api\/?$/, '');
 
 // Optional admin token for edit/delete (set VITE_ADMIN_TOKEN when ADMIN_TOKEN
